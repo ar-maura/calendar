@@ -6,11 +6,11 @@ import time
 import os
 import zipfile
 
-def zipdir(path, ziph):
-    # ziph is zipfile handle
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            ziph.write(os.path.join(root, file))
+# def zipdir(path, ziph):
+#     # ziph is zipfile handle
+#     for root, dirs, files in os.walk(path):
+#         for file in files:
+#             ziph.write(os.path.join(root, file))
 
 # if __name__ == '__main__':
 #     zipf = zipfile.ZipFile('Python.zip', 'w', zipfile.ZIP_DEFLATED)
@@ -48,27 +48,33 @@ def update_notes_list():
         note_text = note[1]
         notes_list.insert(customtkinter.END, note_text)
 
-root = customtkinter.CTk()
-root.title("Приложение для заметок")
-root.geometry("300x400")
-root.resizable(0, 0)
+def show_notes():
+    root = customtkinter.CTk()
+    root.title("Приложение для заметок")
+    root.geometry("300x400")
+    root.resizable(0, 0)
 
-note_label = customtkinter.CTkLabel(root, text="Заметка:")
-note_label.pack(pady=5)
+    note_label = customtkinter.CTkLabel(root, text="Заметка:")
+    note_label.pack(pady=5)
 
-note_entry = customtkinter.CTkEntry(root)
-note_entry.pack(pady=5)
+    global note_entry, notes_list
 
-save_button = customtkinter.CTkButton(root, text="Добавить заметку", command=save_note)
-save_button.pack(pady=5)
+    note_entry = customtkinter.CTkEntry(root)
+    note_entry.pack(pady=5)
 
-delete_button = customtkinter.CTkButton(root, text="Удалить заметку", command=delete_note)
-delete_button.pack(pady=5)
+    save_button = customtkinter.CTkButton(root, text="Добавить заметку", command=save_note)
+    save_button.pack(pady=5)
 
-notes_list = tk.Listbox(root, width=45, height=15)
-notes_list.pack(pady=5)
+    delete_button = customtkinter.CTkButton(root, text="Удалить заметку", command=delete_note)
+    delete_button.pack(pady=5)
 
-db_start()
-update_notes_list()
-root.mainloop()
-conn.close()
+    notes_list = tk.Listbox(root, width=45, height=15)
+    notes_list.pack(pady=5)
+
+    db_start()
+    update_notes_list()
+    root.mainloop()
+    conn.close()
+
+if __name__ == '__main__':
+    show_notes()

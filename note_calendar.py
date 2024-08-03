@@ -4,7 +4,7 @@ import os
 import zipfile
 import datetime
 from tkinter import messagebox
-
+from notes import *
 
 def back():
     global month, year
@@ -52,7 +52,9 @@ def fill():
         days[week_day + month_days + n]['bg'] = '#f3f3f3'
 
 def show_my_notes():
-    print('tratata');
+    show_notes();
+    #print('tratata');
+
 
 
 
